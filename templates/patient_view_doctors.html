@@ -1,0 +1,44 @@
+{% extends 'patient_base.html' %}
+{% load static %}
+{% block title%} Dashboard {% endblock title%}
+{% block content %}
+<div class="container"  style="padding-left: 111px; margin-top:14px; font-size:14px">
+	<form method="GET" style="
+    margin-top: 57px;
+    padding-left: 123px;
+">
+		{{doctor_filt.form}}
+		<button class="btn btn-primary" style="font-size: 11px;background-color: #337ab7;" type="submit">Search</button>
+	</form>
+	<div class="panel panel-primary" style="border: none; font-size: 14px; margin-top:1px;">
+		
+		<div class="panel-heading" style="text-align:center;">
+		<h6 class="panel-title">Doctors</h6>
+	  </div>
+	  <table class="table table-hover" id="dev-table">
+		<thead>
+			<tr>
+				<th><h1 style="font-size:15px;">Name</h1></th>
+				<th><h1 style="font-size:15px;">Profile Picture</h1></th>
+				<th><h1 style="font-size:15px;">Mobile</h1></th>
+				<th><h1 style="font-size:15px;">Department</h1></th>
+			</tr>
+		</thead>
+		{% for d in doctor %}
+		<tr>
+  
+		  <td> {{d.get_name}}</td>
+		  <td> 
+			{% if d.profile_pic %}
+			<img src="/media/{{d.profile_pic}}" alt="Profile Pic" height="40px" width="40px" />
+			{% endif %}
+			</td>
+		  <td>{{d.contact}}</td>
+		  <td>{{d.department}}</td>
+		</tr>
+		{% endfor %}
+		
+	  </table>
+	</div>
+  </div>
+{% endblock content %}

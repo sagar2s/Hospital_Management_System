@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+{% block title%} Dashboard {% endblock title%}
+{% block content %}
+
+		<div class="container"  style="padding-left: 111px; margin-top:14px;">
+			
+			<div class="panel panel-primary" style="border: none;">
+				<form method="GET">
+					{{appt_filter.form}}
+					<button class="btn btn-primary" type="submit">Search</button>
+				</form>
+				
+				<div class="panel-heading" style="text-align:center;">
+				<h6 class="panel-title">Appointments</h6>
+			  </div>
+			  <table class="table table-hover" id="dev-table">
+				<thead>
+					<tr>
+						<th><h1 style="font-size:15px;">Doctor Name</h1></th>
+						<th><h1 style="font-size:15px;">Department</h1></th>
+						<th><h1 style="font-size:15px;">Patient Name</h1></th>
+						
+                        <th><h1 style="font-size:15px;">Description</h1></th>
+						<th><h1 style="font-size:15px;">Appointment Date</h1></th>
+					</tr>
+				</thead>
+				{% for appt in appointment %}
+				<tr>
+                    <td>Dr.{{appt.doctor.get_name}}</h1></td>
+					<td>{{appt.doctor.department}}</h1></td>
+					<td>{{appt.patient.get_name}}</h1></td>
+					<td>{{appt.description}}</h1></td>
+					<td>{{appt.appt_day}} ({{appt.appt_time_from}}-{{appt.appt_time_to}})</td>
+				</tr>
+				{% endfor %}
+			  </table>
+			</div>
+		  </div>
+        
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'doctor_base.html' %}
+{% load static %}
+{% block title%} Dashboard {% endblock title%}
+{% block content %}
+<div class="container" style="padding-left: 111px; margin-top:14px;">
+  <div class="panel panel-primary" style="border: none;">
+    <form method="GET">
+      {{appt_filt.form}}
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">View Appointments</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th><h1 style="font-size:15px;">Patient Name</h1></th>
+            <th><h1 style="font-size:15px;">Age</h1></th>
+            <th><h1 style="font-size:15px;">Mobile</h1></th>
+            <th><h1 style="font-size:15px;">Symptoms</h1></th>
+            <th><h1 style="font-size:15px;">Appointment Date & Time</h1></th>
+          </tr>
+        </thead>
+        {% for a in apptdoctor %}
+        <tr style="font-size: 14px;">
+          <td>{{a.patient.get_name}}</td>
+          <td>{{a.patient.age}}</td>
+          <td>{{a.patient.Phone}}</td>
+          <td>{{a.description}}</td>
+          <td>{{a.appt_day}} ({{a.appt_time_from}}-{{a.appt_time_to}})</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+{% endblock content %}

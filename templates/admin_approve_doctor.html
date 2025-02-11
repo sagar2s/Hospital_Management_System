@@ -1,0 +1,46 @@
+{% extends 'admin_base.html' %}
+{% block title%} Dashboard {% endblock title%}
+{% load static %}
+{% block content %}
+		<div class="container" style="padding-left: 111px; margin-top:14px;">
+			<div class="panel panel-primary" style="border: none;">
+				<form method="GET">
+					{{doctor_filt.form}}
+					<button class="btn btn-primary" type="submit">Search</button>
+				</form>
+				<div class="panel-heading" style="text-align:center;">
+				<h6 class="panel-title">Approve New Doctors</h6>
+			  </div>
+			  <table class="table table-hover" id="dev-table">
+				<thead>
+					<tr>
+						<th><h1 style="font-size:15px;">Name</h1></th>
+						<th><h1 style="font-size:15px;">Profile Picture</h1></th>
+						<th><h1 style="font-size:15px;">Mobile</h1></th>
+                        <th><h1 style="font-size:15px;">Address</h1></th>
+						<th><h1 style="font-size:15px;">Department</h1></th>
+						<th><h1 style="font-size:15px;">Approve</h1></th>
+						<th><h1 style="font-size:15px;">Reject</h1></th>
+					</tr>
+				</thead>
+				{% for d in doctors %}
+				<tr>
+					
+					<td>{{d.get_name}}</td>
+					<td>
+						{% if d.profile_pic %}
+						 <img src="/media/{{d.profile_pic}}" alt="Profile Pic" height="40px" width="40px" /></td>
+						 {% endif %}
+					<td>{{d.contact}}</td>
+					<td>{{d.address}}</td>
+					<td>{{d.department}}</td>
+				  <td><a class="btn btn-primary btn-xs" href="{% url 'approve_doctor' d.id %}"><span class="glyphicon glyphicon-ok"></span></a></td>
+				  <td><a class="btn btn-danger btn-xs" href="{% url 'disapprove_doctor' d.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+				 
+				</tr>
+				{% endfor %}
+				
+			  </table>
+			</div>
+		  </div>
+{% endblock content %}
